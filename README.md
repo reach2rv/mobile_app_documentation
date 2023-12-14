@@ -1,14 +1,14 @@
 Mobile App Developer Document
-1. Homepage
-1.1 Banners from API
+### Homepage
+#### Banners from API
 The homepage will display banners retrieved from an API. These banners will be dynamically loaded and displayed in a carousel or slider format.
 
-API Endpoint:
+##### API Endpoint:
 
 ```bash
 GET /api/banners
 ```
-Response Example:
+##### Response Example:
 
 ```json
 {
@@ -25,10 +25,10 @@ Response Example:
 }
 ```
 
-1.2 Product Categorization
+### Product Categorization
 Products on the homepage will be categorized based on the is_new and is_featured variables.
 
-API Endpoint:
+##### API Endpoint:
 ```
 GET /api/products?category=new
 ```
@@ -36,17 +36,17 @@ GET /api/products?category=new
 GET /api/products?category=featured
 ```
 
-2. Product Detail Screen
+### Product Detail Screen
 
-2.1 Display Product Information
+#### Display Product Information
 The product detail screen will provide detailed information about the selected product.
 
-API Endpoint:
+##### API Endpoint:
 
 ```bash
 GET /api/products/{product_id}
 ```
-Response Example:
+##### Response Example:
 
 ```json
 {
@@ -66,17 +66,17 @@ Response Example:
 }
 ```
 
-2.2 Display Product Images
+#### Display Product Images
 The product detail screen will show images with an option to zoom.
 
-2.3 Display Item Components
+#### Display Item Components
 Item components will be displayed in a grid format with columns like item_code, attributes, pcs, and weight.
 
-API Endpoint:
+##### API Endpoint:
 ```bash
 GET /api/products/{product_id}/components
 ```
-Response Example:
+##### Response Example:
 ```json
 {
   "components": [
@@ -91,14 +91,14 @@ Response Example:
 }
 ```
 
-3. Search Page Overview
+### Search Page
 The search page allows users to search for items using various filters, including item code and specific attributes like item_group, type, sub_type, brand, collection, super_type, weight range, and diamond weight range. The page leverages the items API with dynamically selected variables to fetch filtered data.
 
-4. Search Functionality
-4.1 Search by Item Code
+#### Search Functionality
+##### Search by Item Code
 Allow users to input the item code directly to retrieve a specific item.
 
-  4.2 Filter Options
+##### Filter Options
 Provide a user-friendly interface for users to select filters for refining their search. The available filters include:
 ```
 item_group
@@ -111,20 +111,20 @@ weight range
 diamond weight range
 ```
 
-  4.3 Items API Endpoint
+##### Items API Endpoint
 The search page will utilize the existing items API for fetching filtered data based on user-selected variables.
 
-API Endpoint:
+##### API Endpoint:
 ```bash
 GET /api/items?item_code={item_code}&item_group={item_group}&type={type}&sub_type={sub_type}&brand={brand}&collection={collection}&super_type={super_type}&min_weight={min_weight}&max_weight={max_weight}&min_diamond_weight={min_diamond_weight}&max_diamond_weight={max_diamond_weight}
 
 ```
-Example Request:
+##### Example Request:
 ```bash
 GET /api/items?item_code=ABC123&type=Necklace&brand=BrandXYZ&min_weight=200g&max_weight=500g&min_diamond_weight=0.5ct&max_diamond_weight=2ct
 ```
 
-Example Response:
+##### Example Response:
 ```json
 {
   "items": [
@@ -145,5 +145,5 @@ Example Response:
   ]
 }
 ```
-4.4 User Interface
+#### User Interface
 Implement an intuitive user interface that allows users to easily input search criteria, view applied filters, and see the search results.
