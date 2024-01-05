@@ -589,27 +589,22 @@ in reponse image variable will have part of the url which need to be prepend wit
 "image_3": "ProductImage/JR07311-1YP6P0_5_lar.jpg",
 ```
 
-Image variable value ```ProductImage/JR07311-1YP6P0_1_lar.jpg``` need to be mapped with base url i.e ```https://retail.ornaverse.com/``` to get full image url ```https://retail.ornaverse.com/ProductImage/JR07311-1YP6P0_1_lar.jpg```
-
+Image variable value ```ProductImage/JR07311-1YP6P0_1_lar.jpg``` need to be mapped with base url i.e ```https://retail.ornaverse.com/``` + "uploads/" to get full image url ```https://retail.ornaverse.com/ProductImage/JR07311-1YP6P0_1_lar.jpg```
 
 #### Display Item Components
 Item components ```item_components``` will be displayed in a grid format with columns like item_code, attributes, pcs, and weight. there should be two grids for components one showing metal components and one with stone components can be filters using ```base_item_id``` variable for metal and stone
 
+Your functional write-up for the search page is well-detailed. Here are some slight refinements and suggestions:
 
 ### Search Page
-The search page allows users to search for items using various filters, including item code and specific attributes like ```item_group```, ```type_id```, ```sub_type_id```, ```brand_id```, ```collection_id```, ```super_type_id```, ```weight``` range, and ```diamond_weight``` range. The page leverages the items API with dynamically selected variables to fetch filtered data.
-
-Attributes can be retrived using ```/Services/Master/Attributes/List``` endpoint where as item group, type and sub_type can be retrievd using following endpoints respectively;
-item group ```/Services/Master/ItemGroups/List```
-type (categories) ```/Services/Master/Type/List```
-sub type (sub categories) ```/Services/Master/SubType/List```
+The search page enables users to find items using diverse filters, such as item code and specific attributes like `item_group`, `type_id`, `sub_type_id`, `brand_id`, `collection_id`, `super_type_id`, `weight` range, and `diamond_weight` range. This page leverages the items API with dynamically selected variables to fetch filtered data.
 
 #### Search Functionality
 ##### Search by Item Code
-Allow users to input the item code directly to retrieve a specific item.
+Allow users to input the item code directly to retrieve a specific item. The search bar and filter button are prominently displayed on the page. Users can search for items by entering text in the search bar. Upon clicking the search icon, the application queries the Items API, passing the entered text as the `item_code` variable. The API returns matching items to the user's query, which are then displayed on the search page.
 
 ##### Filter Options
-Provide a user-friendly interface for users to select filters for refining their search. The available filters include:
+Provide a user-friendly interface for users to select filters to refine their search. The available filters include:
 ```
 item_group
 type
@@ -620,6 +615,16 @@ super_type
 weight range
 diamond weight range
 ```
+Data for the above criteria can be fetched from their respective APIs as follows:
+- Attributes: `/Services/Master/Attributes/List`
+- Item group: `/Services/Master/ItemGroups/List`
+- Type (categories): `/Services/Master/Type/List`
+- Subtype (subcategories): `/Services/Master/SubType/List`
+
+Collection and super type are part of attributes and can be selected using `attribute_type_id` where 11 is for super type and 12 is for collection.
+
+#### Filter Functionality
+Users can use filters to search for items with various attributes available in the filter options. Users can multi-select each of the available criteria to filter items. Once the user clicks on apply, the app queries the Items API, passing the selected filter options to each of their respective variables as an array. The API returns matching items to the user's query, which are then displayed on the search page.
 
 ##### Items API Endpoint
 The search page will utilize the existing items API for fetching filtered data based on user-selected variables.
@@ -630,23 +635,19 @@ POST Services/Master/Items/List
 ```
 
 ##### Example Request:
-```bash
-POST Services/Master/Items/List
-```
-Example body
 ```json
 {
     "item_code": null,
-    "item_group_id": null,
-    "type_id": null,
-    "sub_type_id": null,
-    "brand_id": null,
-    "collection_id": null,
-    "super_type_id": null,
+    "item_group_id": [],
+    "type_id": [],
+    "sub_type_id": [],
+    "brand_id": [],
+    "collection_id": [],
+    "super_type_id": [],
     "weight": null,
     "diamond_weight": null
 }
 ```
 
 #### User Interface
-Implement an intuitive user interface that allows users to easily input search criteria, view applied filters, and see the search results.
+Implement an intuitive user interface that allows users to easily input search criteria, view applied filters, and see the search results. Consider providing clear visual feedback on applied filters and maintaining a user-friendly design for a seamless search experience.
