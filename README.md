@@ -637,13 +637,13 @@ POST Services/Master/Items/List
 ##### Example Request:
 ```json
 {
-    "item_code": null,
-    "item_group_id": [],
-    "type_id": [],
-    "sub_type_id": [],
-    "brand_id": [],
-    "collection_id": [],
-    "super_type_id": [],
+    "item_search": null,
+    "item_group_ids": [],
+    "type_ids": [],
+    "sub_type_ids": [],
+    "brand_ids": [],
+    "collection_ids": [],
+    "super_type_ids": [],
     "weight": null,
     "diamond_weight": null
 }
